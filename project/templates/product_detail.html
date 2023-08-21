@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>about</h1>
+    {% extends 'base.html' %}
+
+{% block content %}
+    <h2>{{ product.name }}</h2>
+    <p>Barcode: {{ product.barcode }}</p>
+    <p>Brand: {{ product.brand }}</p>
+    <p>Description: {{ product.description }}</p>
+    <p>Price: {{ product.price }}</p>
+    <p>Available: {{ product.available }}</p>
+
+    <h3>Product Reviews</h3>
+    <ul>
+        {% for review in reviews %}
+            <li>{{ review.rating }}/5 - {{ review.comment }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Add a Review</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Review</button>
+    </form>
+{% endblock %}
+
+</body>
+</html>
